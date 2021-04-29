@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Вход{% endblock %}
+{%block content %}
+<div class="content">
+    <div class="content__container">
+        <div class="login">
+            <form action="#" method="post" enctype="multipart/form-data" class="login__container">
+                {{ form.hidden_tag() }}
+                <div class="login__title">Логин</div>
+                <div class="login__email email">
+                    <div class="email__title">{{ form.email.label }}</div>
+                    <div class="email__input">{{ form.email() }}</div>
+                    {% for error in form.email.errors %}
+                        <span style="color: red;">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="login__password password">
+                    <div class="password__title">{{ form.password.label }}</div>
+                    <div class="password__input">{{ form.password() }}</div>
+                </div>
+                    {% for error in form.password.errors %}
+                        <span style="color: red;">{{ error }}</span>
+                    {% endfor %}
+                <div class="login__buttons">
+                    <a class="registration" href="{{ url_for('registration') }}">Зарегистрироваться?</a>
+                    {{ form.remember_me() }} {{ form.remember_me.label }}
+                    {{ form.submit(size=32) }}
+                </div>
+                <div><a href="{{ url_for('reset_password') }}">Забыли пароль?</a></div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

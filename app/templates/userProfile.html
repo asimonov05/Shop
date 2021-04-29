@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}{{ user.name }} {{ user.surname }}{% endblock %}
+{%block content %}
+<div class="content">
+    <div class="content__container">
+        <div class="userProfile">
+            <div class="userProfile__container">
+                <div class="userProfile__username">{{ user.name }} {{ user.surname }}</div>
+                <div class="userProfile__body">
+                    <div class="userProfile__image">
+                        <picture>
+                            <source srcset="{{ url_for('static', filename='img/icon.webp') }}" type="image/webp"><img src="{{ url_for('static', filename='img/icon.jpg') }}" alt="">
+                        </picture>
+                    </div>
+                    <div class="userProfile__information">
+                        <div class="userProfile__address">Адрес: {{ user.adress }}</div>
+                        <div class="userProfile__email">Email: {{ user.email }}</div>
+                    </div>
+                </div>
+                <div class="userProfile__logout"><a href="{{ url_for('logout') }}">Выйти из аккаунта</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

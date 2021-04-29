@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Карзина{% endblock %}
+{%block content %}
+<div class="content">
+            <div class="content__container">
+                <div class="cart">
+                    <div class="cart__container">
+                        {% if items %}
+                        <div class="cart__clear"><button>Clear All</button></div>
+                        <form action="#" method="#" enctype="multipart/form-data" class="cart__column">
+                            <div class="cart__row">
+                                {% for i in items %}
+                                <div class="cart__product product">
+                                    <div class="product__container">
+                                        <div class="product__container-left">
+                                            <div class="product__choise product__item">
+                                                <input type="checkbox"  name="" id="{{ i.id }}">
+                                            </div>
+                                            <div class="product__img product__item"><picture><source srcset="img/white.webp" type="image/webp"><img src="{{ i.img1 }}" alt=""></picture></div>
+                                            <div class="product__name">{{ i.name }}</div>
+                                        </div>
+                                        <div class="product__container-right">
+                                            <div class="product__price">{{ i.coast }}руб.</div>
+                                            <div class="product__delete" id="{{ i.id }}"></div>
+                                        </div>
+                                    {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cart__buy"><button class="cart__buyBtn" type="submit">Купить</button></div>
+                        </form>
+                    </div>
+                    {% else %}
+                    <p>В вашей казине пока нет товаров</p>
+            {% endif %}
+                </div>
+            </div>
+</div>
+{% endblock %}

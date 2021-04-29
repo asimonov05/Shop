@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}{{ name_of_cat }}{% endblock %}
+{%block content %}
+
+<div class="content">
+            <div class="content__container">
+                <div class="category">
+                    <div class="category__container">
+                        <div class="category__title">
+                        {% if name_of_cat == 'smartphones' %}Смартфоны{% elif name_of_cat == 'cloth' %}Одежда{% elif name_of_cat == 'sport' %}Спорт/Транспорт{% else %}Электроника{% endif %}</div>
+                        <div class="category__row">
+                            <div class="category__crow">
+                                {% for i in items %}
+                                <div class="category__product productItem">
+                                    <div class="productItem__container">
+                                        <div class="productItem__image"><picture><img src="{{ i.img1 }}" alt=""></picture></div>
+                                        <a href="{{ url_for('product', id=i.id) }}" class="productItem__name">{{ i.name }}</a>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Поиск{% endblock %}
+{%block content %}
+<div class="content search">
+            <div class="content__container">
+                <div class="search">
+                    <div class="search__container">
+                        <form action="#" method='post' class="search__bar">
+                            {{ form.hidden_tag() }}
+                            <div class="search__input">{{ form.search() }}</div>
+                            <div class="search__button">{{ form.submit() }}</div>
+                        </form>
+                        <div class="search__results">
+                            {% if not items %}
+                            <p>К сожелению по вашему запросу ничего не найдено</p>
+                    {% elif items[0].name == 'search' %}
+                    {% else %}
+                        {% for i in items %}
+                        <div class="category__product productItem">
+                            <div class="productItem__container">
+                                <div class="productItem__image"><img src="{{ i.img1 }}" alt=""></div>
+                                <a href="{{ url_for('product', id=i.id) }}" class="productItem__name">{{ i.name }}</a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}

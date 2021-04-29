@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/style.css') }}">
+    <title>MShop | {% block title %}{% endblock %}</title>
+</head>
+
+<body>
+    
+<div class="wrapper">
+        <div class="header">
+            <div class="header__container">
+                <a class="header__logo" href="{{ url_for('index') }}"><picture><source srcset="{{ url_for('static', filename='IMG/Logo.webp') }}" type="image/webp"><img src="{{ url_for('static', filename='IMG/Logo.jpg') }}" alt=""></picture></a>
+                <div class="header__burger burger">
+                    <div class="burger__container"><span></span></div>
+                </div>
+                {% if current_user.is_authenticated %}
+                <div class="header__user user">
+                    <a href="{{ url_for('cart') }}" class="user__cart"><picture><source srcset="{{ url_for('static', filename='IMG/cart.webp') }}" type="image/webp"><img src="{{ url_for('static', filename='IMG/cart.jpg') }}" alt=""></picture></a>
+                    <a href="{{ url_for('user_profile', id=current_user.id) }}" class="user__Icon"><img src="{{ url_for('static', filename='img/icon.jpg') }}" alt=""></a>
+                </div>
+                {% else %}
+                <div class="header__user user">
+                    <a href="{{ url_for('cart') }}" class="user__cart"><picture><source srcset="{{ url_for('static', filename='IMG/cart.webp') }}" type="image/webp"><img src="{{ url_for('static', filename='IMG/cart.jpg') }}" alt=""></picture></a>
+                    <div class="user__log">Log In</div>
+                </div>
+                {% endif %}
+            </div>
+            <div class="burger__menu">
+                <div class="burger__item"><a href="{{ url_for('search') }}">Поиск</a></div>
+                <div class="burger__item"><a href="{{ url_for('about') }}">О нас</a></div>
+                <div class="burger__item">Контакты</div>
+            </div>
+        </div>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+
+</html>

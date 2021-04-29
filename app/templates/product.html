@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}{{ item.name }}{% endblock %}
+{%block content %}
+
+<div class="content">
+    <div class="content__container">
+        <div class="product">
+            <div class="product__container">
+                <div class="product__title">{{ item.name }}</div>
+                <div class="product__body body">
+                    <div class="product__image body__item">
+                        <picture>
+                            <img src="{{ item.img1 }}" alt="">
+                        </picture>
+                    </div>
+                    <div class="body__container body__item">
+                        <div class="product__description">{{ item.description | safe }}</div>
+                        <div class="product__buyProcess">
+                            <div class="product__price">
+                                {{ item.coast }}руб.
+                            </div>
+                            {% if item.amount > 0 %}
+                            <a href="{{ url_for('add_to_cart', id=item.id) }}"><div class="product__buy">
+                                <p>Добавить в корзину</p>
+                            </div></a>
+                            {% else %}
+                            <a>Нет в наличии</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
